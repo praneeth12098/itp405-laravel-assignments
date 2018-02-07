@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Validator;
 
 class PlaylistsController extends Controller
 {
@@ -28,5 +29,31 @@ class PlaylistsController extends Controller
     		'playlist' => $playlist,
     		'tracks' => $tracks
     	]);
+    }
+
+    public function create() {
+    	return view('create-playlist');
+    }
+
+    public function store(Request $request) {
+    	$validation = Validator::make([
+    		'playlistName' => $request->input('playlist')
+    	], [
+    		'playlistName' => 'required|min:3'
+    	]);
+
+
+    	if($validation->passes()) {
+
+    		DB::table('playlists')->insert([
+    			'Name' => $request->input('playlist')
+    		]);
+
+    		return redirect('/playlists');
+    	} else {
+    		return redirect('/playlists/new')
+    			->withInput()
+    			->withErrors($validation);
+    	}
     }
 }
