@@ -56,4 +56,46 @@ class PlaylistsController extends Controller
     			->withErrors($validation);
     	}
     }
+
+    public function showEdit($playlistID) {
+        $playlist = DB::table('playlists')
+            ->where('PlaylistId', '=', $playlistID)
+            ->first();
+
+        return view('edit-playlist', [
+            'playlist' => $playlist
+        ]);
+    }
+
+    public function edit(Request $request) {
+        $playlistID = $request->input('hiddenId');
+
+        $validation = Validator::make([
+            'playlistName' => $request->input('playlist')
+        ], [
+            'playlistName' =>'required|min:3'
+        ]);
+
+        if($validation->passes()) {
+            DB::table('playlists')
+                ->where('PlaylistId', '=', $playlistID)
+                ->update([
+                    'Name' => $request->input('playlist')
+            ]);
+
+            return redirect('/playlists');
+        } else {
+            return redirect('/playlists/'.$playlistID.'/edit')
+                ->withInput()
+                ->withErrors($validation);
+        }
+    }
+
+    public function delete($playlistID) {
+        DB::table('playlists')
+            ->where('PlaylistId', '=', $playlistID)
+            ->delete();
+
+        return redirect('/playlists');
+    }
 }

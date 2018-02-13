@@ -24,3 +24,6 @@ Route::get('/playlists', 'PlaylistsController@index');
 Route::get('/playlists/new', 'PlaylistsController@create');
 Route::get('/playlists/{id}', 'PlaylistsController@show');
 Route::post('/playlists', 'PlaylistsController@store');
+Route::post('/editplaylists', 'PlaylistsController@edit');
+Route::get('/playlists/{id}/edit', 'PlaylistsController@showEdit');
+Route::get('/playlists/{id}/delete', 'PlaylistsController@delete');
