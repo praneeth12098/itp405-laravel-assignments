@@ -8,18 +8,21 @@
 
 	<body>
 		<table class="table">
+			@if(!empty($genre['Name'])) <h1>{{$genre->Name}}</h1> @endif
 			<tr>
 				<th>Track</th>
 				<th>Album</th>
 				<th>Artist</th>
+				<th>Media Type</th>
 				<th>Price</th>
 			</tr>
 			<?php foreach($tracks as $track) : ?>
 			<tr>
-				<td>{{$track->trackName}}</td>
-				<td>{{$track->albumTitle}}</td>
-				<td>{{$track->artistName}}</td>
-				<td>{{$track->trackPrice}}</td>
+				<td>{{$track->Name}}</td>
+				<td>{{$track->Album->Title}}</td>
+				<td>{{$track->Album->Artist->Name}}</td>
+				<td>{{$track->MediaType->Name}}</td>
+				<td>{{$track->UnitPrice}}</td>
 			</tr>
 			<?php endforeach ?>
 		</table>

@@ -14,7 +14,7 @@
 			</tr>
 			@foreach($invoiceItems as $invoiceItem)
 			<tr>
-				<td>{{$invoiceItem->trackName}} by {{$invoiceItem->artistName}}</td>
+				<td>{{$invoiceItem->Track->Name}} by {{$invoiceItem->Track->Album->Artist->Name}}</td>
 				<td>{{$invoiceItem->Quantity}}</td>
 				<td>{{$invoiceItem->UnitPrice}}</td>
 			</tr>

@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Genre extends Model
+class InvoiceItem extends Model
 {
-    protected $primaryKey = 'GenreId';
+    protected $primaryKey = 'InvoiceItemId';
     public $timestamps = false;
 
     public function Track() {
