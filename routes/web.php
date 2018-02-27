@@ -26,12 +26,18 @@ Route::middleware(['protected'])->group(function () {
 	Route::get('/invoices', 'InvoicesController@index');
 	Route::get('/invoices/{id}', 'InvoicesController@show');
 
+	Route::get('/settings', 'SettingsController@index');
+	Route::post('/settings', 'SettingsController@update');
+
 	Route::get('/phpinfo', function() {
 		echo phpinfo();
 	});
 });
 
 Route::middleware(['maintenance'])->group(function () {
+	// Route::get('/maintenance', 'MaintenanceController@index');
+	// Route::get('/settings', 'SettingsController@index');
+	// Route::post('/settings/{id}', 'SettingsController@update');
 	Route::get('/signup', 'SignupController@index');
 	Route::post('/signup', 'SignupController@signup');
 	Route::get('/genres', 'GenresController@index');
