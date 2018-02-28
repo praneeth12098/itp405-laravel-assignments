@@ -55,4 +55,5 @@ Route::middleware(['maintenance'])->group(function () {
 
 	Route::get('/albums/{id}/reviews', 'ReviewsController@index');
 	Route::get('/albums/{id}/reviews/new', 'ReviewsController@create');
+	Route::post('/albums/{id}/reviews', 'ReviewsController@store');
 });
