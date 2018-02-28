@@ -1,3 +1,8 @@
+@extends('main-layout')
+
+@section('title', 'Albums')
+
+@section('content')
 <!DOCTYPE html>
 <html>
 	<head>
@@ -19,3 +24,4 @@
 			<?php endforeach ?>
 		</table>
 	</body>
+@endsection

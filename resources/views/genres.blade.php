@@ -1,3 +1,8 @@
+@extends('main-layout')
+
+@section('title', 'Genres')
+
+@section('content')
 <!DOCTYPE html>
 <html>
 	<head>
@@ -27,3 +32,4 @@
 		</table>
 	</body>
 </html>
+@endsection

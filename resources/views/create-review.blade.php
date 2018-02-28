@@ -1,6 +1,6 @@
 @extends('main-layout')
 
-@section('title', 'Create a Playlist')
+@section('title', 'Create a Review')
 
 @section('content')
 	<h1>Add a Review</h1>
