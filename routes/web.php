@@ -57,3 +57,7 @@ Route::middleware(['maintenance'])->group(function () {
 	Route::get('/albums/{id}/reviews/new', 'ReviewsController@create');
 	Route::post('/albums/{id}/reviews', 'ReviewsController@store');
 });
+
+Route::get('/login/twitter', 'LoginController@redirectToTwitter');
+Route::get('/login/twitter/callback', 'LoginController@handleTwitterCallback');
+Route::post('/tweets', 'TwitterController@store');

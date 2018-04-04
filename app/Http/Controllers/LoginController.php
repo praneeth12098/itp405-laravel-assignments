@@ -4,11 +4,37 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use Socialite;
+use App\User;
 
 class LoginController extends Controller
 {
     public function index() {
     	return view('login');
+    }
+
+    public function redirectToTwitter() {
+        return Socialite::driver('twitter')->redirect();
+    }
+
+    public function handleTwitterCallback() {
+        $twitterUser = Socialite::driver('twitter')->user();
+
+        $user = User::where('email', '=', $twitterUser->getEmail())->first();
+
+        if (!$user) {
+            $user = new User();
+            $user->name = $twitterUser->getName();
+            $user->email = $twitterUser->getEmail();
+        }
+
+        $user->twitter_token = $twitterUser->token;
+        $user->twitter_token_secret = $twitterUser->tokenSecret;
+
+        $user->save();
+
+        Auth::login($user);
+        return redirect('/profile');
     }
 
     public function login() {
