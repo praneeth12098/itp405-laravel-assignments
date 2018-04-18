@@ -17,6 +17,10 @@ class LoginController extends Controller
         return Socialite::driver('twitter')->redirect();
     }
 
+    public function redirectToGoogle() {
+        return Socialite::driver('google')->redirect();
+    }
+
     public function handleTwitterCallback() {
         $twitterUser = Socialite::driver('twitter')->user();
 
@@ -31,6 +35,25 @@ class LoginController extends Controller
         $user->twitter_token = $twitterUser->token;
         $user->twitter_token_secret = $twitterUser->tokenSecret;
 
+        $user->save();
+
+        Auth::login($user);
+        return redirect('/profile');
+    }
+
+    public function handleGoogleCallback() {
+        $googleUser = Socialite::driver('google')->user();
+
+        $user = User::where('email', '=', $googleUser->getEmail())->first();
+
+        if (!$user) {
+            $user = new User();
+            $user->name = $googleUser->getName();
+            $user->email = $googleUser->getEmail();
+        }
+
+        $user->google_token = $googleUser->token;
+        $user->google_refresh_token = $googleUser->refreshToken;
         $user->save();
 
         Auth::login($user);

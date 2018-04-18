@@ -61,3 +61,5 @@ Route::middleware(['maintenance'])->group(function () {
 Route::get('/login/twitter', 'LoginController@redirectToTwitter');
 Route::get('/login/twitter/callback', 'LoginController@handleTwitterCallback');
 Route::post('/tweets', 'TwitterController@store');
+Route::get('/login/google', 'LoginController@redirectToGoogle');
+Route::get('/login/google/callback', 'LoginController@handleGoogleCallback');
